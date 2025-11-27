@@ -5,6 +5,13 @@ import os
 import pandas as pd
 from psycopg2.extras import execute_batch
 
+'''
+O código de forma geral está com muita parte repetida e ineficiente. Refatorar depois:
+- instanciando cursor em todas as funções
+- verificar o povoamento do banco de dados
+- colocar anotação de tipo nos parâmetros
+'''
+
 def apply_schema(conn):
     cursor = conn.cursor()
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +32,8 @@ def insert_data_in_DB(pasteName, archive, conn):
     data_to_insert = [tuple(row) for row in df[['texto', 'label']].values]
     
     insert_query = "INSERT INTO reviews (texto, label) VALUES (%s, %s)"
+
+    # Tem uma complexidade de aproximadamente O(n) --> adaptar para COPY depois
     execute_batch(cursor, insert_query, data_to_insert)
 
     conn.commit()
