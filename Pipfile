@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 python-dotenv = "*"
+pandas = "*"
+transformers = "*"
 psycopg2 = "*"
 
 [dev-packages]
