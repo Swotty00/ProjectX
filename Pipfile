@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 python-dotenv = "*"
 pandas = "*"
-transformers = "*"
 psycopg2 = "*"
+datasets = "*"
+torch = "*"
+transformers = {extras = ["torch"], version = "*"}
+nlpaug = "*"
 
 [dev-packages]
 
